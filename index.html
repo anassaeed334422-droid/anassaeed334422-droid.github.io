@@ -3,133 +3,273 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hafiz | Web Developer</title>
+<meta name="description" content="Affordable Web Developer Portfolio with Live Price Calculator">
+<title>Hafiz Anas | Web Developer</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
+:root{
+--bg:#f4f6f8;
+--text:#333;
+--card:#fff;
+--primary:#0d6efd;
 }
-body{
-    background:#f4f6f8;
-    color:#333;
-    line-height:1.6;
+body.dark{
+--bg:#121212;
+--text:#eee;
+--card:#1e1e1e;
 }
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:var(--bg);color:var(--text);transition:.3s}
+html{scroll-behavior:smooth}
+
+/* NAV */
+nav{
+position:sticky;top:0;z-index:100;
+display:flex;justify-content:space-between;
+padding:15px 30px;background:var(--card);
+box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
+nav h2{color:var(--primary)}
+nav button{
+border:none;background:var(--primary);
+color:#fff;padding:6px 14px;border-radius:20px;
+cursor:pointer
+}
+
+/* HEADER */
 header{
-    background:linear-gradient(135deg,#0d6efd,#084298);
-    color:#fff;
-    padding:60px 20px;
-    text-align:center;
-}
-header h1{
-    font-size:2.5rem;
-}
-header p{
-    margin-top:10px;
+background:linear-gradient(135deg,#0d6efd,#084298);
+color:#fff;text-align:center;padding:90px 20px
 }
 .btn{
-    display:inline-block;
-    margin-top:20px;
-    padding:12px 28px;
-    background:#25d366;
-    color:#fff;
-    text-decoration:none;
-    border-radius:30px;
+display:inline-block;margin-top:25px;
+padding:12px 32px;background:#25d366;
+color:#fff;text-decoration:none;border-radius:30px
 }
-section{
-    padding:60px 20px;
-    max-width:1100px;
-    margin:auto;
-}
-h2{
-    text-align:center;
-    margin-bottom:40px;
-    color:#0d6efd;
-}
-.services,.projects{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+
+/* SECTION */
+section{padding:80px 20px;max-width:1100px;margin:auto}
+h2{text-align:center;color:var(--primary);margin-bottom:40px}
+
+.grid{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px
 }
 .card{
-    background:#fff;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.1);
-    transition:.3s;
+background:var(--card);padding:30px;border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+text-align:center
 }
-.card:hover{
-    transform:translateY(-5px);
+
+/* WOW SECTION ONLY */
+.wow-section .card{
+    position:relative;
+    transition:0.4s ease;
 }
-.about{
-    text-align:center;
-    max-width:800px;
-    margin:auto;
+
+.wow-section .card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(13,110,253,0.15),
+        rgba(37,211,102,0.15)
+    );
+    opacity:0;
+    transition:0.4s;
+    pointer-events:none; /* 🔥 FIX */
 }
-.contact{
-    text-align:center;
+
+.wow-section .card:hover::before{
+    opacity:1;
 }
+
+.wow-section .card:hover{
+    transform:translateY(-12px) scale(1.04);
+    box-shadow:0 18px 40px rgba(0,0,0,0.18);
+}
+/* SCROLL ANIMATION */
+.card{
+opacity:0;
+transform:translateY(40px);
+transition:0.6s ease;
+}
+.card.show{
+opacity:1;
+transform:none;
+}
+
+/* INPUT */
+input,select{
+padding:10px;width:100%;margin-top:10px;
+border-radius:8px;border:1px solid #ccc
+}
+
 footer{
-    background:#222;
-    color:#fff;
-    text-align:center;
-    padding:20px;
-    margin-top:40px;
+background:#222;color:#fff;text-align:center;padding:25px
 }
 </style>
 </head>
+
 <body>
 
+<nav>
+<h2>Hafiz</h2>
+<button onclick="toggleMode()">🌙 Mode</button>
+</nav>
+
 <header>
-    <h1>Hafiz Anas Saeed</h1>
-    <p>HTML & CSS Web Developer</p>
-    <p>Simple • Responsive • Affordable Websites</p>
-    <a class="btn" href="https://wa.me/923108647290">Hire Me on WhatsApp</a>
+<h1 id="welcome">Hafiz Anas Saeed</h1>
+<p>HTML & CSS Web Developer</p>
+<a class="btn" href="https://wa.me/923108647290">Hire Me</a>
+<br><br>
+<button class="btn" onclick="speakIntro()">🔊 Listen Introduction</button>
 </header>
 
+<!-- PERSONALIZATION -->
 <section>
-    <h2>My Services</h2>
-    <div class="services">
-        <div class="card">✔ 1-Page Business Website</div>
-        <div class="card">✔ Mobile Responsive Design</div>
-        <div class="card">✔ Website Updates & Fixes</div>
+<h2>Personalize Your Visit 😎</h2>
+<div class="card">
+<input type="text" placeholder="Enter your name"
+oninput="setName(this.value)">
+<p style="margin-top:15px">This makes clients feel special ✨</p>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section>
+<h2>Services</h2>
+<div class="grid">
+<div class="card">Business Website</div>
+<div class="card">Responsive Design</div>
+<div class="card">Website Fixes</div>
+</div>
+</section>
+
+<!-- UNIQUE PRICE CALCULATOR -->
+<section>
+<h2>Instant Website Price Calculator 💰</h2>
+<div class="card">
+<label>Number of Pages</label>
+<select id="pages">
+<option value="5000">1 Page</option>
+<option value="10000">3 Pages</option>
+<option value="15000">5 Pages</option>
+</select>
+
+<label>Design Type</label>
+<select id="design">
+<option value="0">Simple</option>
+<option value="3000">Premium</option>
+</select>
+
+<h3 style="margin-top:20px">
+Estimated Price:  
+<span id="price">Rs 5,000</span>
+</h3>
+</div>
+</section>
+
+<section class="wow-section">
+    <h2>Why Clients Say WOW 😲</h2>
+    <div class="grid">
+        <div class="card">
+            🚀 Website Speaks (Voice Intro)
+            <p>Most beginners don’t offer this feature</p>
+        </div>
+        <div class="card">
+            💡 Live Price Calculator
+            <p>Clients instantly know the cost</p>
+        </div>
+        <div class="card">
+            ⭐ Premium Animations
+            <p>Smooth, modern & professional feel</p>
+        </div>
     </div>
 </section>
 
+<!-- CONTACT -->
 <section>
-    <h2>Sample Projects</h2>
-    <div class="projects">
-        <div class="card">Medical Store Website</div>
-        <div class="card">Tuition Academy Website</div>
-        <div class="card">Electrician Business Website</div>
-    </div>
-</section>
-
-<section>
-    <h2>About Me</h2>
-    <div class="about">
-        <p>
-            I am a beginner web developer with 6 month experience in HTML and CSS.
-            I help local businesses grow by creating clean, fast and mobile-friendly websites.
-        </p>
-    </div>
-</section>
-
-<section class="contact">
-    <h2>Contact</h2>
-    <p>WhatsApp for quick response</p>
-    <a class="btn" href="https://wa.me/923108647290">Message Now</a>
+<h2>Contact</h2>
+<div class="card">
+<p>WhatsApp for fast response</p>
+<a class="btn" href="https://wa.me/923108647290">Message Now</a>
+</div>
 </section>
 
 <footer>
-    © 2025 | Hafiz Web Developer
+© 2025 | Hafiz Web Developer
 </footer>
 
+<script>
+/* DARK MODE */
+function toggleMode(){
+document.body.classList.toggle('dark')
+localStorage.setItem('mode',
+document.body.classList.contains('dark'))
+}
+if(localStorage.getItem('mode')==="true"){
+document.body.classList.add('dark')
+}
+
+/* NAME */
+function setName(name){
+document.getElementById('welcome').innerText =
+name ? `Welcome ${name} 👋` : 'Hafiz Anas Saeed'
+}
+
+/* PRICE CALCULATOR */
+const pages=document.getElementById('pages')
+const design=document.getElementById('design')
+const price=document.getElementById('price')
+
+function calc(){
+price.style.transform="scale(1.25)";
+price.innerText=`Rs ${Number(pages.value)+Number(design.value)}`;
+setTimeout(()=>price.style.transform="scale(1)",250);
+}
+pages.onchange=design.onchange=calc
+</script>
+
+<script>
+function speakIntro(){
+    const text = "This website is designed to give clients a wow experience. These features make me different from one hundred beginner developers.";
+    
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    speech.rate = 0.9;
+    speech.pitch = 1;
+    window.speechSynthesis.speak(speech);
+}
+</script>
+
+<script>
+/* SCROLL REVEAL */
+const cards=document.querySelectorAll('.card');
+const reveal=()=>{
+cards.forEach(card=>{
+const top=card.getBoundingClientRect().top;
+if(top<window.innerHeight-50){
+card.classList.add('show');
+}
+});
+}
+window.addEventListener('scroll',reveal);
+reveal();
+</script>
+
+<script>
+/* AUTO VOICE (FIRST VISIT ONLY) */
+if(!localStorage.getItem("heardIntro")){
+    window.addEventListener("load",()=>{
+        setTimeout(speakIntro,1200);
+        localStorage.setItem("heardIntro","yes");
+    });
+}
+</script>
 </body>
-
 </html>
-
