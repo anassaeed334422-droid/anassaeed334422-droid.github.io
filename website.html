@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hafiz Anas | Web Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#f4f6f8;
+--text:#333;
+--card:#fff;
+--primary:#0d6efd;
+--grad:linear-gradient(135deg,#0d6efd,#25d366,#6610f2);
+}
+
+body.dark{
+--bg:#0b0b0b;
+--text:#eee;
+--card:#141414;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+body{background:var(--bg);color:var(--text);transition:.4s}
+html{scroll-behavior:smooth}
+
+/* NAV */
+nav{
+position:sticky;top:0;z-index:100;
+display:flex;justify-content:space-between;
+padding:15px 30px;
+background:rgba(255,255,255,.85);
+backdrop-filter:blur(10px);
+}
+body.dark nav{background:rgba(0,0,0,.7)}
+nav h2{
+background:var(--grad);
+-webkit-background-clip:text;
+color:transparent;
+font-weight:700
+}
+nav button{
+border:none;
+background:var(--grad);
+color:#fff;
+padding:8px 18px;
+border-radius:25px;
+cursor:pointer;
+box-shadow:0 0 15px rgba(13,110,253,.5)
+}
+
+/* HEADER */
+header{
+background:linear-gradient(120deg,#0d6efd,#6610f2,#25d366);
+background-size:300% 300%;
+animation:bgMove 8s infinite alternate;
+color:#fff;
+text-align:center;
+padding:110px 20px;
+}
+@keyframes bgMove{
+0%{background-position:0%}
+100%{background-position:100%}
+}
+
+header h1{
+font-size:3rem;
+animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+}
+
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:14px 38px;
+border-radius:35px;
+color:#fff;
+text-decoration:none;
+background:var(--grad);
+box-shadow:0 0 25px rgba(37,211,102,.6);
+transition:.4s;
+}
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 45px rgba(37,211,102,.9);
+}
+
+/* SECTION */
+section{padding:90px 20px;max-width:1100px;margin:auto}
+h2{
+text-align:center;
+font-size:2.4rem;
+margin-bottom:50px;
+background:var(--grad);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px
+}
+
+/* CARD */
+.card{
+background:var(--card);
+padding:35px;
+border-radius:20px;
+text-align:center;
+position:relative;
+overflow:hidden;
+opacity:0;
+transform:translateY(50px);
+transition:.6s ease;
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:var(--grad);
+opacity:0;
+transition:.5s;
+z-index:-1;
+}
+
+.card:hover::before{opacity:.15}
+
+.card:hover{
+transform:translateY(-18px) scale(1.05);
+box-shadow:0 25px 60px rgba(0,0,0,.3)
+}
+
+.card.show{opacity:1;transform:none}
+
+/* INPUT */
+input,select{
+width:100%;
+padding:12px;
+margin-top:12px;
+border-radius:10px;
+border:none;
+outline:none;
+box-shadow:0 0 10px rgba(0,0,0,.15)
+}
+
+/* FOOTER */
+footer{
+background:#000;
+color:#fff;
+text-align:center;
+padding:30px
+}
+/* LOADER */
+#loader{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#0d6efd,#6610f2,#25d366);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+color:#fff;
+font-size:1.2rem;
+}
+
+.spinner{
+width:70px;
+height:70px;
+border-radius:50%;
+border:6px solid rgba(255,255,255,.3);
+border-top:6px solid #fff;
+animation:spin 1s linear infinite;
+margin-bottom:15px;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+/* hide loader smoothly */
+body.loaded #loader{
+opacity:0;
+pointer-events:none;
+transition:0.8s;
+}
+/* CUSTOM CURSOR */
+.cursor{
+width:35px;
+height:35px;
+border:2px solid #0d6efd;
+border-radius:50%;
+position:fixed;
+pointer-events:none;
+transform:translate(-50%,-50%);
+transition:.15s ease;
+z-index:99999;
+}
+
+.cursor-dot{
+width:8px;
+height:8px;
+background:#25d366;
+border-radius:50%;
+position:fixed;
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:99999;
+}
+
+a:hover ~ .cursor,
+button:hover ~ .cursor{
+transform:translate(-50%,-50%) scale(1.6);
+background:rgba(13,110,253,.1);
+}
+
+/* mobile par disable */
+@media(max-width:768px){
+.cursor,.cursor-dot{display:none}
+}
+</style>
+</head>
+
+<body>
+    <!-- LOADER -->
+<div id="loader">
+  <div class="spinner"></div>
+  <p>Loading Experience...</p>
+</div>
+
+<nav>
+<h2>Hafiz</h2>
+<button onclick="toggleMode()">🌙 Mode</button>
+</nav>
+
+<header>
+<h1 id="welcome">Hafiz Anas Saeed</h1>
+<p>HTML & CSS Web Developer</p>
+<a class="btn" href="https://wa.me/923108647290">Hire Me</a><br><br>
+<button class="btn" onclick="speakIntro()">🔊 Listen Introduction</button>
+</header>
+
+<section>
+<h2>Personalize Your Visit 😎</h2>
+<div class="card">
+<input type="text" placeholder="Enter your name" oninput="setName(this.value)">
+<p style="margin-top:15px">Clients feel special ✨</p>
+</div>
+</section>
+
+<section>
+<h2>Services</h2>
+<div class="grid">
+<div class="card">🚀 Business Website</div>
+<div class="card">📱 Responsive Design</div>
+<div class="card">🛠 Website Fixes</div>
+</div>
+</section>
+
+<section>
+<h2>Instant Website Price 💰</h2>
+<div class="card">
+<select id="pages">
+<option value="5000">1 Page</option>
+<option value="10000">3 Pages</option>
+<option value="15000">5 Pages</option>
+</select>
+<select id="design">
+<option value="0">Simple</option>
+<option value="3000">Premium</option>
+</select>
+<h3 style="margin-top:25px">Price: <span id="price">Rs 5,000</span></h3>
+</div>
+</section>
+
+<section>
+<h2>Why Clients Say WOW 😲</h2>
+<div class="grid">
+<div class="card">🎤 Voice Introduction</div>
+<div class="card">💡 Live Calculator</div>
+<div class="card">✨ Premium Animations</div>
+</div>
+</section>
+
+<footer>© 2025 Hafiz Web Developer</footer>
+
+<script>
+function toggleMode(){
+document.body.classList.toggle('dark')
+}
+function setName(name){
+welcome.innerText=name?`Welcome ${name} 👋`:"Hafiz Anas Saeed"
+}
+const p=document.getElementById('pages')
+const d=document.getElementById('design')
+const price=document.getElementById('price')
+p.onchange=d.onchange=()=>price.innerText="Rs "+(+p.value + +d.value)
+
+const cards=document.querySelectorAll('.card')
+window.addEventListener('scroll',()=>{
+cards.forEach(c=>{
+if(c.getBoundingClientRect().top<window.innerHeight-80)
+c.classList.add('show')
+})
+})
+
+function speakIntro(){
+speechSynthesis.speak(new SpeechSynthesisUtterance(
+"This website is designed to give clients a premium wow experience."
+))
+}
+</script>
+<script>
+window.addEventListener("load",()=>{
+  document.body.classList.add("loaded");
+  setTimeout(()=>{
+    document.getElementById("loader").style.display="none";
+  },900);
+});
+</script>
+<script>
+const cursor=document.querySelector('.cursor');
+const dot=document.querySelector('.cursor-dot');
+
+document.addEventListener('mousemove',e=>{
+cursor.style.left=e.clientX+'px';
+cursor.style.top=e.clientY+'px';
+dot.style.left=e.clientX+'px';
+dot.style.top=e.clientY+'px';
+});
+</script>
+
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
+
+</body>
+</html>
