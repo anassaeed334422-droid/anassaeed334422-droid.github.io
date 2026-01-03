@@ -3,10 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hafiz Anas | Web Developer</title>
+<title>Hafiz Anas | Professional Web Developer in Pakistan</title>
+
+<meta name="description" content="Hafiz Anas – Professional Web Developer creating fast, modern & responsive websites. Hire me for business, portfolio & ecommerce websites.">
+
+<meta name="keywords" content="Web Developer Pakistan, Website Developer, Frontend Developer, HTML CSS JavaScript Expert">
+
+<meta name="author" content="Hafiz Anas">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Hafiz Anas | Web Developer">
+<meta property="og:description" content="Fast, responsive & modern websites for your business">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://anassaeed334422-droid.github.io/">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="favicon.ico">
 <style>
 :root{
 --bg:#f4f6f8;
@@ -21,6 +35,7 @@ body.dark{
 --text:#eee;
 --card:#141414;
 }
+.card{ will-change: transform, opacity; }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
 body{background:var(--bg);color:var(--text);transition:.4s}
@@ -203,6 +218,26 @@ transform:translate(-50%,-50%);
 transition:.15s ease;
 z-index:99999;
 }
+#contact form{
+ max-width:400px;
+ margin:auto;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+}
+#contact input, textarea{
+ padding:12px;
+ border-radius:8px;
+ border:1px solid #ccc;
+}
+#contact button{
+ padding:12px;
+ background:var(--primary);
+ color:#fff;
+ border:none;
+ border-radius:8px;
+ cursor:pointer;
+}
 
 .cursor-dot{
 width:8px;
@@ -220,10 +255,45 @@ button:hover ~ .cursor{
 transform:translate(-50%,-50%) scale(1.6);
 background:rgba(13,110,253,.1);
 }
+.projects{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:20px;
+}
+.project{
+ background:#fff;
+ padding:20px;
+ border-radius:15px;
+ box-shadow:0 10px 30px rgba(0,0,0,.1);
+ transition:.3s;
+}
+.project:hover{
+ transform:translateY(-5px);
+}
+.project a{
+ color:var(--primary);
+ font-weight:bold;
+ text-decoration:none;
+}
+.whatsapp-btn{
+ position:fixed; right:20px; bottom:20px;
+ background:#25D366; color:#fff;
+ padding:14px 22px; border-radius:50px;
+ font-weight:700; text-decoration:none; z-index:9999;
+ box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
 
 /* mobile par disable */
 @media(max-width:768px){
 .cursor,.cursor-dot{display:none}
+}
+*{
+  box-sizing: border-box;
+}
+img{
+  max-width:100%;
+  height:auto;
+  
 }
 </style>
 </head>
@@ -288,6 +358,42 @@ background:rgba(13,110,253,.1);
 <div class="card">✨ Premium Animations</div>
 </div>
 </section>
+
+<section id="contact" class="section">
+  <h2>Contact Me</h2>
+
+  <form action="https://formspree.io/f/xwkgnqvd" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<section id="projects" class="section">
+  <h2>My Projects</h2>
+
+  <div class="projects">
+    <div class="project">
+      <h3>Business Website</h3>
+      <p>Fast responsive business website</p>
+      <a href="https://wa.me/923108647290" target="_blank">Order Similar</a>
+    </div>
+
+    <div class="project">
+  <h3>Portfolio Website</h3>
+  <p>Personal portfolio with animations, dark mode & SEO</p>
+  <a href="https://wa.me/923108647290" target="_blank">Order Similar</a>
+</div>
+
+    <div class="project">
+      <h3>E-Commerce UI</h3>
+      <p>Shopping website frontend</p>
+      <a href="https://wa.me/923108647290" target="_blank">Order Similar</a>
+    </div>
+  </div>
+</section>
+<a href="https://wa.me/923108647290" class="whatsapp-btn" target="_blank">💬 WhatsApp</a>
 
 <footer>© 2025 Hafiz Web Developer</footer>
 
